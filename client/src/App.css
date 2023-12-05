@@ -1,24 +1,39 @@
 .header__component {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 89vh;
 }
 
 .header__content {
-  height: 100px;
-  background-color: aqua;
+  flex: 20%;
+  /* height: 100px; */
+  background-color: rgb(195, 255, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.header__content > div {
+  font-size: 50px;
+  font-weight: bold;
 }
 
 .personal__component {
+  flex: 80%;
   display: flex;
   height: 100%;
 }
 .personal__nav {
   flex: 30%;
   background-color: beige;
+  overflow: auto;
+  height: 100%;
+}
+
+.personal__nav--top {
 }
 .personal__memo {
-  flex: 100%;
+  flex: 70%;
   background-color: rgb(110, 117, 250);
 }
 

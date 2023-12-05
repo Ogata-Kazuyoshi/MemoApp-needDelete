@@ -9,7 +9,9 @@ const Header = () => {
   }, []);
   return (
     <div className="header__component">
-      <div className="header__content">DIG Notes</div>
+      <div className="header__content">
+        <div>DIG Notes</div>
+      </div>
       <Outlet />
     </div>
   );

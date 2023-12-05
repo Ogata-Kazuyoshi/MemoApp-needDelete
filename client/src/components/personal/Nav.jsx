@@ -26,26 +26,26 @@ const Nav = (props) => {
   //   console.log('nw]owTyping : ', nowTyping);
 
   const selectCard = (id, content) => {
-    const autoPost = async () => {
-      if (isModify) {
-        setIsModify(false);
-        try {
-          const sendData = {
-            update_date: changeToStringDate(new Date()),
-            content: newMessage,
-          };
-          const res = await dbApi.updateCard(currentId, sendData);
-          console.log('res : ', res);
-          const getAll = await dbApi.getDB();
-          setMemos(getAll.data);
-          setSaved('saved');
-          resetSaved();
-        } catch (err) {
-          console.log(`err : ${err}`);
-        }
-      } else return;
-    };
-    autoPost();
+    // const autoPost = async () => {
+    //   if (isModify) {
+    //     setIsModify(false);
+    //     try {
+    //       const sendData = {
+    //         update_date: changeToStringDate(new Date()),
+    //         content: newMessage,
+    //       };
+    //       const res = await dbApi.updateCard(currentId, sendData);
+    //       console.log('res : ', res);
+    //       const getAll = await dbApi.getDB();
+    //       setMemos(getAll.data);
+    //       setSaved('saved');
+    //       resetSaved();
+    //     } catch (err) {
+    //       console.log(`err : ${err}`);
+    //     }
+    //   } else return;
+    // };
+    // autoPost();
     console.log('selected : ', id);
     setNewMessage('');
     setNowTyping(content);

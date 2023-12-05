@@ -20,9 +20,29 @@ const Memo = (props) => {
     resetSaved,
   } = props;
   const textAreaRef = useRef(null);
+  const id = currentId;
 
   useEffect(() => {
-    setNewMessage('');
+    const autoPost = async () => {
+      if (isModify) {
+        setIsModify(false);
+        try {
+          const sendData = {
+            update_date: changeToStringDate(new Date()),
+            content: newMessage,
+          };
+          const res = await dbApi.updateCard(id, sendData);
+          console.log('res : ', res);
+          const getAll = await dbApi.getDB();
+          setMemos(getAll.data);
+          setSaved('saved');
+          resetSaved();
+        } catch (err) {
+          console.log(`err : ${err}`);
+        }
+      } else return;
+    };
+    autoPost();
   }, [currentId]);
 
   const deleteHandle = async () => {
