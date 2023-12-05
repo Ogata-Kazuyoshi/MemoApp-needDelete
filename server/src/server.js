@@ -19,6 +19,9 @@ app.use(
 // });
 app.use('/api/v1', apiRoute);
 app.use(express.static(path.join(__dirname, '../../client/dist/')));
+app.use('/personal/memo', (req, res) => {
+  res.redirect('/');
+});
 
 app.listen(PORT, () => {
   console.log('server is runnnig');

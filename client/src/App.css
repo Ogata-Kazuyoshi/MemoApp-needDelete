@@ -1,4 +1,45 @@
-#root {
+.header__component {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header__content {
+  height: 100px;
+  background-color: aqua;
+}
+
+.personal__component {
+  display: flex;
+  height: 100%;
+}
+.personal__nav {
+  flex: 30%;
+  background-color: beige;
+}
+.personal__memo {
+  flex: 100%;
+  background-color: rgb(110, 117, 250);
+}
+
+.card__container {
+  height: 70px;
+  border: 1px solid black;
+  margin: 15px 5px;
+  background-color: burlywood;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card__title {
+  text-align: left;
+}
+.card__date {
+  text-align: right;
+}
+
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +80,4 @@
 
 .read-the-docs {
   color: #888;
-}
+} */

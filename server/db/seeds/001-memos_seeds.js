@@ -24,5 +24,17 @@ exports.seed = async function (knex) {
       update_date: '2023-12-05 10:58:53',
       content: 'test3',
     },
+    {
+      user_id: 9999,
+      create_date: '2023-12-05 09:58:53',
+      update_date: '2023-12-05 10:58:53',
+      content: 'dfadsfadsfadsfadsfadsfadsfadsfads\nafdasfa',
+    },
+    {
+      user_id: 9999,
+      create_date: '2023-12-05 09:58:53',
+      update_date: '2023-12-05 10:58:53',
+      content: 'test4\ndfadsfadsfasdf',
+    },
   ]);
 };
