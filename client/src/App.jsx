@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [memos, setMemos] = useState([]);
+  const [nowTyping, setNowTyping] = useState(null);
+  const [newMessage, setNewMessage] = useState('');
   const [currentId, setCurrentId] = useState(null);
   const clickHandle = async () => {
     const res = await dbApi.getDB();
@@ -51,6 +53,10 @@ function App() {
                   setMemos={setMemos}
                   currentId={currentId}
                   setCurrentId={setCurrentId}
+                  nowTyping={nowTyping}
+                  setNowTyping={setNowTyping}
+                  newMessage={newMessage}
+                  setNewMessage={setNewMessage}
                 />
               }
             >
@@ -62,6 +68,10 @@ function App() {
                     setMemos={setMemos}
                     currentId={currentId}
                     setCurrentId={setCurrentId}
+                    nowTyping={nowTyping}
+                    setNowTyping={setNowTyping}
+                    newMessage={newMessage}
+                    setNewMessage={setNewMessage}
                   />
                 }
               ></Route>

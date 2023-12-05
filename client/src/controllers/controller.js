@@ -15,3 +15,20 @@ export const changeToStringDate = (nowDate) => {
   const sec = paddinZero(nowDate.getSeconds());
   return `${year}-${month}-${day} ${hours}:${min}:${sec}`;
 };
+
+export const titleGet = (str) => {
+  if (str.includes('\n')) {
+    const splitString = str.split('\n')[0];
+    if (splitString.length <= 25) {
+      return splitString;
+    } else {
+      return splitString.slice(0, 25);
+    }
+  } else {
+    if (str.length <= 25) {
+      return str;
+    } else {
+      return str.slice(0, 25);
+    }
+  }
+};

@@ -4,28 +4,26 @@ import '../../App';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import { changeToStringDate } from '../../controllers/controller';
 import dbApi from '../../api/dbHandling';
+import { titleGet } from '../../controllers/controller';
 
 const Nav = (props) => {
-  const { memos, setMemos, currentId, setCurrentId } = props;
+  const {
+    memos,
+    setMemos,
+    currentId,
+    setCurrentId,
+    nowTyping,
+    setNowTyping,
+    newMessage,
+    setNewMessage,
+  } = props;
 
-  const titleGet = (str) => {
-    if (str.includes('\n')) {
-      const splitString = str.split('\n')[0];
-      if (splitString.length <= 25) {
-        return splitString;
-      } else {
-        return splitString.slice(0, 25);
-      }
-    } else {
-      if (str.length <= 25) {
-        return str;
-      } else {
-        return str.slice(0, 25);
-      }
-    }
-  };
-  const selectCard = (id) => {
+  console.log('nw]owTyping : ', nowTyping);
+
+  const selectCard = (id, content) => {
     console.log('selected : ', id);
+    setNewMessage('');
+    setNowTyping(content);
     setCurrentId(id);
   };
   const addHandler = async () => {
@@ -55,14 +53,18 @@ const Nav = (props) => {
               key={elm.id}
               className="card__container"
               onClick={() => {
-                selectCard(elm.id);
+                selectCard(elm.id, elm.content);
               }}
               style={{
                 border: elm.id === currentId ? '2px solid black' : 'none',
               }}
             >
               <div className="card__title">
-                <div>{titleGet(elm.content)}</div>
+                <div>
+                  {elm.id === currentId
+                    ? titleGet(nowTyping)
+                    : titleGet(elm.content)}
+                </div>
               </div>
               <div className="card__date">
                 <div>{elm.update_date}</div>

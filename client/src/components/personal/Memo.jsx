@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import dbApi from '../../api/dbHandling';
+import { titleGet } from '../../controllers/controller';
 
 const Memo = (props) => {
-  const { memos, setMemos, currentId, setCurrentId } = props;
-  const [newMessage, setNewMessage] = useState('');
+  const {
+    memos,
+    setMemos,
+    currentId,
+    setCurrentId,
+    nowTyping,
+    setNowTyping,
+    newMessage,
+    setNewMessage,
+  } = props;
+
   console.log('currentID : ', currentId);
 
   useEffect(() => {
@@ -27,6 +37,7 @@ const Memo = (props) => {
   }
   const changeHandler = (e) => {
     setNewMessage(e.target.value);
+    setNowTyping(titleGet(e.target.value));
   };
   return (
     <div className="personal__memo">
