@@ -53,6 +53,7 @@ const Memo = (props) => {
         setMemos(getAll.data);
         setSaved('saved');
         resetSaved();
+        setIsModify(false);
       } catch (err) {
         console.log(`err : ${err}`);
       }
