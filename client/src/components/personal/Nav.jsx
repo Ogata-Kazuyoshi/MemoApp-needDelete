@@ -75,7 +75,7 @@ const Nav = (props) => {
     const updated = new Date(date);
     let diff = (current - updated) / 1000 / 60;
     if (import.meta.env.VITE_NODE_ENV === 'production') {
-      diff = diff + 32400;
+      diff = diff + 540;
     }
     if (Math.floor(diff) < 60) {
       return `Last updated ${Math.floor(diff)} min ago`;
