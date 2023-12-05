@@ -17,6 +17,7 @@ export const changeToStringDate = (nowDate) => {
 };
 
 export const titleGet = (str) => {
+  if (str === null) return;
   if (str.includes('\n')) {
     const splitString = str.split('\n')[0];
     if (splitString.length <= 25) {

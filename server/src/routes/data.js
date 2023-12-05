@@ -5,7 +5,7 @@ const tableName = 'memos';
 
 //DBの情報を全て取得してくるエンドポイント
 router.get('/', async (req, res) => {
-  const data = await knex('memos').select('*');
+  const data = await knex('memos').select('*').orderBy('update_date', 'desc');
   res.send(data);
 });
 

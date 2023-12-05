@@ -42,6 +42,14 @@ const Nav = (props) => {
     console.log('changeTime', changeDate);
     console.log('res : ', res);
   };
+
+  const checkDiffTime = (date) => {
+    const current = new Date();
+    const updated = new Date(date);
+    const diff = (current - updated) / 1000;
+    return `${diff} s`;
+  };
+
   return (
     <div className="personal__component">
       <div className="personal__nav">
@@ -67,7 +75,7 @@ const Nav = (props) => {
                 </div>
               </div>
               <div className="card__date">
-                <div>{elm.update_date}</div>
+                <div>{checkDiffTime(elm.update_date)}</div>
               </div>
             </div>
           );
