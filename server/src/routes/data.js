@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
   res.send(data);
 });
 
-//DBに情報をPOSTするエンドポイント
+//DBに情報新規登録するエンドポイント
 router.post('/:username', async (req, res) => {
   const user = req.params.username;
   if (user === 'testUser') {
@@ -24,6 +24,13 @@ router.post('/:username', async (req, res) => {
   } else {
     res.send('userが違います');
   }
+});
+
+//DBの情報を削除するエンドポイント
+router.delete('/:id', async (req, res) => {
+  const memoId = req.params.id;
+  const deleteHandle = await knex(tableName).where({ id: memoId }).del();
+  res.send({ message: '削除完了しました' });
 });
 
 module.exports = router;

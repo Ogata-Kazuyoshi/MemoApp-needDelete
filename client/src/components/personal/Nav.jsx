@@ -1,6 +1,9 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import '../../App';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import { changeToStringDate } from '../../controllers/controller';
+import dbApi from '../../api/dbHandling';
 
 const Nav = (props) => {
   const { memos, setMemos, currentId, setCurrentId } = props;
@@ -25,10 +28,27 @@ const Nav = (props) => {
     console.log('selected : ', id);
     setCurrentId(id);
   };
+  const addHandler = async () => {
+    const currentTime = new Date();
+    const changeDate = changeToStringDate(currentTime);
+    const sendData = {
+      create_date: changeDate,
+      update_date: changeDate,
+      content: '',
+    };
+    const username = 'testUser';
+    const res = await dbApi.createCard(username, sendData);
+    const resAll = await dbApi.getDB();
+    setMemos(resAll.data);
+    setCurrentId(res.data.id);
+    console.log('changeTime', changeDate);
+    console.log('res : ', res);
+  };
   return (
     <div className="personal__component">
       <div className="personal__nav">
         <div className="personal__nav--top">Nav</div>
+        <AddBoxIcon onClick={addHandler} />
         {memos.map((elm) => {
           return (
             <div
@@ -36,6 +56,9 @@ const Nav = (props) => {
               className="card__container"
               onClick={() => {
                 selectCard(elm.id);
+              }}
+              style={{
+                border: elm.id === currentId ? '2px solid black' : 'none',
               }}
             >
               <div className="card__title">
