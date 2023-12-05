@@ -15,6 +15,9 @@ const Memo = (props) => {
     setNewMessage,
     isModify,
     setIsModify,
+    saved,
+    setSaved,
+    resetSaved,
   } = props;
   const textAreaRef = useRef(null);
 
@@ -48,6 +51,8 @@ const Memo = (props) => {
         console.log('res : ', res);
         const getAll = await dbApi.getDB();
         setMemos(getAll.data);
+        setSaved('saved');
+        resetSaved();
       } catch (err) {
         console.log(`err : ${err}`);
       }
@@ -61,13 +66,13 @@ const Memo = (props) => {
       flg = true;
       timer = setTimeout(() => {
         autoPost();
-      }, 3000);
+      }, 5000);
     } else {
       clearTimeout(timer);
       //   flg = false;
       timer = setTimeout(() => {
         autoPost();
-      }, 3000);
+      }, 5000);
     }
   };
 
@@ -109,6 +114,7 @@ const Memo = (props) => {
       <div className="personal__memo--top">
         <div>
           <DeleteForeverIcon onClick={deleteHandle} />
+          <div>{saved}</div>
         </div>
         <button onClick={updateHandler}>編集完了する</button>
       </div>

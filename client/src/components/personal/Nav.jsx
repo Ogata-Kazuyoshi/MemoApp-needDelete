@@ -18,6 +18,9 @@ const Nav = (props) => {
     setNewMessage,
     isModify,
     setIsModify,
+    saved,
+    setSaved,
+    resetSaved,
   } = props;
 
   //   console.log('nw]owTyping : ', nowTyping);
@@ -62,8 +65,6 @@ const Nav = (props) => {
         return `Last updated ${Math.floor(diff)} days ago`;
       }
     }
-
-    return `${diff} s`;
   };
 
   return (

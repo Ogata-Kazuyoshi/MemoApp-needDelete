@@ -12,6 +12,14 @@ function App() {
   const [newMessage, setNewMessage] = useState('');
   const [currentId, setCurrentId] = useState(null);
   const [isModify, setIsModify] = useState(false);
+  const [saved, setSaved] = useState('');
+
+  const resetSaved = () => {
+    setTimeout(() => {
+      setSaved('');
+    }, 3000);
+  };
+
   const clickHandle = async () => {
     const res = await dbApi.getDB();
     console.log('res : ', res);
@@ -60,6 +68,9 @@ function App() {
                   setNewMessage={setNewMessage}
                   isModify={isModify}
                   setIsModify={setIsModify}
+                  saved={saved}
+                  setSaved={setSaved}
+                  resetSaved={resetSaved}
                 />
               }
             >
@@ -77,6 +88,9 @@ function App() {
                     setNewMessage={setNewMessage}
                     isModify={isModify}
                     setIsModify={setIsModify}
+                    saved={saved}
+                    setSaved={setSaved}
+                    resetSaved={resetSaved}
                   />
                 }
               ></Route>
