@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import dbApi from '../../api/dbHandling';
-import { titleGet } from '../../controllers/controller';
+import { titleGet, changeToStringDate } from '../../controllers/controller';
 
 const Memo = (props) => {
   const {
@@ -39,13 +39,24 @@ const Memo = (props) => {
     setNewMessage(e.target.value);
     setNowTyping(titleGet(e.target.value));
   };
+
+  const updateHandler = async () => {
+    const sendData = {
+      update_date: changeToStringDate(new Date()),
+      content: newMessage,
+    };
+    const res = await dbApi.updateCard(currentId, sendData);
+    console.log('res : ', res);
+    const getAll = await dbApi.getDB();
+    setMemos(getAll.data);
+  };
   return (
     <div className="personal__memo">
       <div className="personal__memo--top">
         <div>
           <DeleteForeverIcon onClick={deleteHandle} />
         </div>
-        <button>編集</button>
+        <button onClick={updateHandler}>編集完了する</button>
       </div>
       {currentId === null ? (
         <></>

@@ -6,6 +6,7 @@ const dbApi = {
   createCard: (username, params) =>
     axiosClient.post(`/data/${username}`, params),
   deletCard: (id) => axiosClient.delete(`/data/${id}`),
+  updateCard: (id, params) => axiosClient.post(`/data/memo/${id}`, params),
 };
 
 export default dbApi;

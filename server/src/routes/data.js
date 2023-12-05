@@ -25,6 +25,18 @@ router.post('/:username', async (req, res) => {
     res.send('userが違います');
   }
 });
+router.post('/memo/:id', async (req, res) => {
+  const memoId = req.params.id;
+
+  const reqBody = req.body;
+  req.body.user_id = 10000;
+  const data = await knex(tableName)
+    .where({ id: memoId })
+    .update(reqBody)
+    .returning('id')
+    .then((elm) => elm[0].id);
+  res.send({ id: data });
+});
 
 //DBの情報を削除するエンドポイント
 router.delete('/:id', async (req, res) => {
