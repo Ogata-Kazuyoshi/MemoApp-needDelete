@@ -25,7 +25,7 @@ const Memo = (props) => {
     if (currentId === null) return;
     const res = await dbApi.deletCard(currentId);
     const resAll = await dbApi.getDB();
-    setCurrentId(memos[0].id);
+    setCurrentId(null);
     setMemos(resAll.data);
   };
 

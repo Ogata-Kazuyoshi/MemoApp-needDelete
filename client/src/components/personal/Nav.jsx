@@ -39,6 +39,7 @@ const Nav = (props) => {
     const resAll = await dbApi.getDB();
     setMemos(resAll.data);
     setCurrentId(res.data.id);
+    setNowTyping('');
     console.log('changeTime', changeDate);
     console.log('res : ', res);
   };
