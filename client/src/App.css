@@ -39,6 +39,15 @@
   text-align: right;
 }
 
+.personal__memo--inputarea {
+  width: 90%;
+  height: 90%;
+}
+.personal__memo--inputarea > textarea {
+  width: 100%;
+  height: 100%;
+}
+
 /* #root {
   max-width: 1280px;
   margin: 0 auto;

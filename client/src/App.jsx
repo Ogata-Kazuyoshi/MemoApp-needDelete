@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [memos, setMemos] = useState([]);
+  const [currentId, setCurrentId] = useState(null);
   const clickHandle = async () => {
     const res = await dbApi.getDB();
     console.log('res : ', res);
@@ -29,7 +30,7 @@ function App() {
       setMemos(res.data);
     };
     getCurrent();
-  });
+  }, []);
 
   return (
     <>
@@ -44,11 +45,25 @@ function App() {
           <Route path="/" element={<Header />}>
             <Route
               path="/personal"
-              element={<Nav memos={memos} setMemos={setMemos} />}
+              element={
+                <Nav
+                  memos={memos}
+                  setMemos={setMemos}
+                  currentId={currentId}
+                  setCurrentId={setCurrentId}
+                />
+              }
             >
               <Route
                 path="/personal/memo"
-                element={<Memo memos={memos} setMemos={setMemos} />}
+                element={
+                  <Memo
+                    memos={memos}
+                    setMemos={setMemos}
+                    currentId={currentId}
+                    setCurrentId={setCurrentId}
+                  />
+                }
               ></Route>
             </Route>
           </Route>

@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import '../../App';
 
 const Nav = (props) => {
-  const { memos, setMemos } = props;
+  const { memos, setMemos, currentId, setCurrentId } = props;
 
   const titleGet = (str) => {
     if (str.includes('\n')) {
@@ -21,13 +21,23 @@ const Nav = (props) => {
       }
     }
   };
+  const selectCard = (id) => {
+    console.log('selected : ', id);
+    setCurrentId(id);
+  };
   return (
     <div className="personal__component">
       <div className="personal__nav">
         <div className="personal__nav--top">Nav</div>
         {memos.map((elm) => {
           return (
-            <div key={elm.id} className="card__container">
+            <div
+              key={elm.id}
+              className="card__container"
+              onClick={() => {
+                selectCard(elm.id);
+              }}
+            >
               <div className="card__title">
                 <div>{titleGet(elm.content)}</div>
               </div>
