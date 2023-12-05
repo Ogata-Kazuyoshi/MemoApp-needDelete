@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import dbApi from '../../api/dbHandling';
 import { titleGet, changeToStringDate } from '../../controllers/controller';
@@ -13,9 +13,10 @@ const Memo = (props) => {
     setNowTyping,
     newMessage,
     setNewMessage,
+    isModify,
+    setIsModify,
   } = props;
-
-  console.log('currentID : ', currentId);
+  const textAreaRef = useRef(null);
 
   useEffect(() => {
     setNewMessage('');
@@ -33,11 +34,47 @@ const Memo = (props) => {
   if (currentId !== null) {
     index = memos.findIndex((elm) => elm.id === currentId);
     // setNewMessage(memos[index].content);
-    console.log(memos[index].content);
+    // console.log(memos[index].content);
   }
+  const autoPost = async () => {
+    if (isModify) {
+      setIsModify(false);
+      try {
+        const sendData = {
+          update_date: changeToStringDate(new Date()),
+          content: newMessage,
+        };
+        const res = await dbApi.updateCard(currentId, sendData);
+        console.log('res : ', res);
+        const getAll = await dbApi.getDB();
+        setMemos(getAll.data);
+      } catch (err) {
+        console.log(`err : ${err}`);
+      }
+    } else return;
+  };
+
+  let timer;
+  let flg = false;
+  const timeFunc = () => {
+    if (flg) {
+      flg = true;
+      timer = setTimeout(() => {
+        autoPost();
+      }, 3000);
+    } else {
+      clearTimeout(timer);
+      //   flg = false;
+      timer = setTimeout(() => {
+        autoPost();
+      }, 3000);
+    }
+  };
+
   const changeHandler = (e) => {
     setNewMessage(e.target.value);
     setNowTyping(titleGet(e.target.value));
+    timeFunc();
   };
 
   const updateHandler = async () => {
@@ -50,6 +87,23 @@ const Memo = (props) => {
     const getAll = await dbApi.getDB();
     setMemos(getAll.data);
   };
+
+  const activeModify = () => {
+    // timer();
+    setIsModify(true);
+  };
+
+  //   const keydownHandler = () => {
+  //     console.log('keyが押されました');
+  //     clearTimeout(timer);
+  //     timer();
+  //   };
+
+  //   if (textAreaRef.current) {
+  //     // textAreaRef.current.addEventListener('keydown', keydownHandler);
+  //     textAreaRef.current.addEventListener('keyup', keydownHandler);
+  //   }
+
   return (
     <div className="personal__memo">
       <div className="personal__memo--top">
@@ -66,7 +120,13 @@ const Memo = (props) => {
             type="text"
             value={newMessage || memos[index].content}
             onChange={changeHandler}
+            onClick={activeModify}
             className="persnal__memo--input"
+            ref={textAreaRef}
+            style={{
+              backgroundColor: isModify ? 'white' : 'rgb(191, 191, 191)',
+              border: isModify ? '2px solid black' : 'none',
+            }}
           />
         </div>
       )}

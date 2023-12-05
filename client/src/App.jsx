@@ -11,6 +11,7 @@ function App() {
   const [nowTyping, setNowTyping] = useState(null);
   const [newMessage, setNewMessage] = useState('');
   const [currentId, setCurrentId] = useState(null);
+  const [isModify, setIsModify] = useState(false);
   const clickHandle = async () => {
     const res = await dbApi.getDB();
     console.log('res : ', res);
@@ -57,6 +58,8 @@ function App() {
                   setNowTyping={setNowTyping}
                   newMessage={newMessage}
                   setNewMessage={setNewMessage}
+                  isModify={isModify}
+                  setIsModify={setIsModify}
                 />
               }
             >
@@ -72,6 +75,8 @@ function App() {
                     setNowTyping={setNowTyping}
                     newMessage={newMessage}
                     setNewMessage={setNewMessage}
+                    isModify={isModify}
+                    setIsModify={setIsModify}
                   />
                 }
               ></Route>

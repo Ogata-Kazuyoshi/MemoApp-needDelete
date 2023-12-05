@@ -16,15 +16,18 @@ const Nav = (props) => {
     setNowTyping,
     newMessage,
     setNewMessage,
+    isModify,
+    setIsModify,
   } = props;
 
-  console.log('nw]owTyping : ', nowTyping);
+  //   console.log('nw]owTyping : ', nowTyping);
 
   const selectCard = (id, content) => {
     console.log('selected : ', id);
     setNewMessage('');
     setNowTyping(content);
     setCurrentId(id);
+    setIsModify(false);
   };
   const addHandler = async () => {
     const currentTime = new Date();
@@ -47,7 +50,19 @@ const Nav = (props) => {
   const checkDiffTime = (date) => {
     const current = new Date();
     const updated = new Date(date);
-    const diff = (current - updated) / 1000;
+    let diff = (current - updated) / 1000 / 60;
+    if (Math.floor(diff) < 60) {
+      return `Last updated ${Math.floor(diff)} min ago`;
+    } else {
+      diff = diff / 60;
+      if (Math.floor(diff) < 60) {
+        return `Last updated ${Math.floor(diff)} hours ago`;
+      } else {
+        diff = diff / 24;
+        return `Last updated ${Math.floor(diff)} days ago`;
+      }
+    }
+
     return `${diff} s`;
   };
 

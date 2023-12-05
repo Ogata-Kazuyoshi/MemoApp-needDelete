@@ -26,6 +26,7 @@
   height: 70px;
   border: 1px solid black;
   margin: 15px 5px;
+  /* background-color: rgb(191, 191, 191); */
   background-color: burlywood;
   display: flex;
   flex-direction: column;
