@@ -54,7 +54,7 @@ const Nav = (props) => {
     const current = new Date();
     const updated = new Date(date);
     let diff = (current - updated) / 1000 / 60;
-    if (import.meta.env.VITE_NODE_ENV === production) {
+    if (import.meta.env.VITE_NODE_ENV === 'production') {
       diff = diff + 32400;
     }
     if (Math.floor(diff) < 60) {
