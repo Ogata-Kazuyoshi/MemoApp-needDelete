@@ -75,8 +75,10 @@ const Nav = (props) => {
   return (
     <div className="personal__component">
       <div className="personal__nav">
-        <div className="personal__nav--top">Nav</div>
-        <AddBoxIcon onClick={addHandler} />
+        <div className="personal__nav--top">
+          <AddBoxIcon onClick={addHandler} />
+        </div>
+
         {memos.map((elm) => {
           return (
             <div

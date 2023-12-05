@@ -31,6 +31,10 @@
 }
 
 .personal__nav--top {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin-right: 20px;
 }
 .personal__memo {
   flex: 70%;
