@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import '../../App';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -34,14 +34,20 @@ const Nav = (props) => {
   };
   const addHandler = async () => {
     const currentTime = new Date();
-    const changeDate = changeToStringDate(currentTime);
+    // const changeDate = changeToStringDate(currentTime);
+    const changeDate = Math.floor(currentTime.getTime() / 1000);
     const sendData = {
       create_date: changeDate,
       update_date: changeDate,
       content: '',
     };
-    const username = 'testUser';
-    const res = await dbApi.createCard(username, sendData);
+    let maxId = 0;
+    if (memos.length !== 0) {
+      const memoIds = memos.map((elm) => elm.id);
+      maxId = Math.max(...memoIds);
+    }
+    console.log(`maxId : ${maxId}`);
+    const res = await dbApi.createCard(maxId + 1, sendData);
     const resAll = await dbApi.getDB();
     setMemos(resAll.data);
     setCurrentId(res.data.id);
@@ -51,8 +57,8 @@ const Nav = (props) => {
   };
 
   const checkDiffTime = (date) => {
-    const current = new Date();
-    const updated = new Date(date);
+    const current = new Date().getTime();
+    const updated = date * 1000;
     let diff = (current - updated) / 1000 / 60;
     if (import.meta.env.VITE_NODE_ENV === 'production') {
       diff = diff + 540;
@@ -99,6 +105,7 @@ const Nav = (props) => {
                 </div>
               </div>
               <div className="card__date">
+                {/* <div>{checkDiffTime(elm.update_date)}</div> */}
                 <div>{checkDiffTime(elm.update_date)}</div>
               </div>
             </div>

@@ -82,30 +82,30 @@ const Memo = (props) => {
 
   let timer;
   let flg = false;
-  const timeFunc = () => {
-    if (flg) {
-      flg = true;
-      timer = setTimeout(() => {
-        autoPost();
-      }, 5000);
-    } else {
-      clearTimeout(timer);
-      //   flg = false;
-      timer = setTimeout(() => {
-        autoPost();
-      }, 5000);
-    }
-  };
+  // const timeFunc = () => {
+  //   if (flg) {
+  //     flg = true;
+  //     timer = setTimeout(() => {
+  //       autoPost();
+  //     }, 5000);
+  //   } else {
+  //     clearTimeout(timer);
+  //     //   flg = false;
+  //     timer = setTimeout(() => {
+  //       autoPost();
+  //     }, 5000);
+  //   }
+  // };
 
   const changeHandler = (e) => {
     setNewMessage(e.target.value);
     setNowTyping(titleGet(e.target.value));
-    timeFunc();
+    // timeFunc();
   };
 
   const updateHandler = async () => {
     const sendData = {
-      update_date: changeToStringDate(new Date()),
+      update_date: Math.floor(new Date().getTime() / 1000),
       content: newMessage,
     };
     const res = await dbApi.updateCard(currentId, sendData);

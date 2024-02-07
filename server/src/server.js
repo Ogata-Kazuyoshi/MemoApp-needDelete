@@ -5,14 +5,14 @@ require('dotenv').config();
 const apiRoute = require('./routes/index');
 const cors = require('cors');
 const app = express();
-const PORT = 4242 || process.env.PORT;
+const PORT = 8080 || process.env.PORT;
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: 'http://localhost:5173',
-  })
-);
+// app.use(
+//   cors({
+//     origin: 'http://localhost:5173',
+//   })
+// );
 
 // app.get('/', (req, res) => {
 //   res.send('Hello Node');

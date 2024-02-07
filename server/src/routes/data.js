@@ -10,22 +10,20 @@ router.get('/', async (req, res) => {
 });
 
 //DBに情報新規登録するエンドポイント
-router.post('/:username', async (req, res) => {
-  const user = req.params.username;
-  if (user === 'testUser') {
-    const reqBody = req.body;
-    req.body.user_id = 10000;
-    const data = await knex(tableName)
-      .insert(reqBody)
-      .returning('id')
-      .then((elm) => elm[0].id);
-    console.log('newId : ', data);
-    res.send({ id: data });
-  } else {
-    res.send('userが違います');
-  }
-});
 router.post('/memo/:id', async (req, res) => {
+  const newId = req.params.id;
+  const reqBody = req.body;
+  req.body.user_id = 10000;
+  req.body.id = newId;
+  const data = await knex(tableName)
+    .insert(reqBody)
+    .returning('id')
+    .then((elm) => elm[0].id);
+  console.log('newId : ', data);
+  res.send({ id: data });
+});
+
+router.patch('/memo/:id', async (req, res) => {
   const memoId = req.params.id;
 
   const reqBody = req.body;
